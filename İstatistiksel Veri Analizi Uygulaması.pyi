@@ -1,4 +1,4 @@
-# Gelişmiş Sekmeli Grafik Arayüz – Tkinter (Tüm İstatistiksel Fonksiyonlar Entegre Edildi)
+
 
 import pandas as pd
 import numpy as np
@@ -13,13 +13,11 @@ from statsmodels.formula.api import ols
 import statsmodels.api as sm
 from sklearn.preprocessing import LabelEncoder
 
-# --- GLOBAL ---
+
 df = pd.DataFrame()
 aktif_figur = None
 
 
-
-# --- VERİ YÜKLEME ve ÇIKTI ---
 def csv_yukle():
     global df
     dosya_yolu = filedialog.askopenfilename(filetypes=[("CSV veya Excel dosyaları", "*.csv *.xlsx")])
@@ -102,7 +100,7 @@ def temizle_ve_yukle_bilgi():
         output.insert(tk.END, ilk20.to_string())
         output.insert(tk.END, "\n")
 
-# --- GRAFİK SEKME DESTEK ---
+# --- GRAFİK 
 def grafik_goster(fig, baslik="Grafik"):
     global aktif_figur
     for tab in graph_notebook.tabs():
@@ -118,7 +116,7 @@ def grafik_goster(fig, baslik="Grafik"):
     aktif_figur = fig
     plt.close(fig)
 
-# --- ANALİZ FONKSİYONLARI ---
+# ANALİZ FONKSİYONLARI ---
 def sayisal_istatistikler():
     if df.empty:
         messagebox.showwarning("Uyarı", "Önce veri yükleyin.")
@@ -350,7 +348,7 @@ def regresyon_analizi():
     ttk.Button(reg_win, text="Analizi Başlat", command=analiz_basla).pack(pady=10)
 
 
-# --- GRAFİK KAYIT ---
+
 def grafik_kaydet():
     if aktif_figur is None:
         return
@@ -359,16 +357,16 @@ def grafik_kaydet():
         aktif_figur.savefig(dosya_yolu)
         messagebox.showinfo("Bilgi", "Grafik kaydedildi.")
 
-# --- GLOBAL ---
+
 df = pd.DataFrame()
 aktif_figur = None
 
-# --- ARAYÜZ ---
+
 pencere = tk.Tk()
 pencere.title("İstatistiksel Veri Analizi Uygulaması")
 pencere.geometry("1200x700")
 
-# Tema ve stil ayarları
+
 ttk.Style().theme_use("clam")
 ttk.Style().configure("TButton", font=("Segoe UI", 10), padding=6)
 
@@ -412,7 +410,7 @@ butonlar = [
     ("Küme Grafiği", kume_grafigi)
 ]
 
-# 2'li yan yana buton düzeni (estetik görünüm için)
+
 for i, (yazi, fonk) in enumerate(butonlar):
     row = i // 2
     col = i % 2
@@ -426,7 +424,7 @@ ttk.Label(left_frame, text="Çıktı / Log").pack()
 output = scrolledtext.ScrolledText(left_frame, height=25, width=45, wrap=tk.WORD)
 output.pack(fill=tk.BOTH, expand=1, pady=5)
 
-# Sekmeli grafik alanı
+
 graph_frame = ttk.Frame(main_frame)
 graph_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=1, padx=5, pady=5)
 
